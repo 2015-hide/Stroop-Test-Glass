@@ -137,19 +137,30 @@ public final class CardBuilderActivity extends Activity {
     }
 
     /**
-     * Returns a new {@link CardBuilder} with the specified layout and adds five images to it for
-     * the mosaic.
+     * Stroop test images
      */
     private static CardBuilder createCardWithImages(Context context, CardBuilder.Layout layout) {
         CardBuilder card = new CardBuilder(context, layout);
-        card.addImage(R.drawable.codemonkey1);
-        card.addImage(R.drawable.codemonkey2);
-        card.addImage(R.drawable.codemonkey3);
-        card.addImage(R.drawable.codemonkey4);
-        card.addImage(R.drawable.codemonkey5);
-        card.addImage(R.drawable.codemonkey6);
-        card.addImage(R.drawable.codemonkey7);
-        card.addImage(R.drawable.codemonkey8);
+        card.addImage(R.drawable.1);
+        card.addImage(R.drawable.2);
+        card.addImage(R.drawable.3);
+        card.addImage(R.drawable.4);
+        card.addImage(R.drawable.5);
+        card.addImage(R.drawable.6);
+        card.addImage(R.drawable.7);
+        card.addImage(R.drawable.8);
+        card.addImage(R.drawable.9);
+        card.addImage(R.drawable.10);
+        card.addImage(R.drawable.11);
+        card.addImage(R.drawable.12);
+        card.addImage(R.drawable.13);
+        card.addImage(R.drawable.14);
+        card.addImage(R.drawable.15);
+        card.addImage(R.drawable.16);
+        card.addImage(R.drawable.17);
+        card.addImage(R.drawable.18);
+        card.addImage(R.drawable.19);
+        card.addImage(R.drawable.20);
         return card;
     }
 
