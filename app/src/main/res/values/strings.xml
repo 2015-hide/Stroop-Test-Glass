@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="app_name">ColorApp</string>
-    <string name="title_activity_color_app">Color App Immersion</string>
-    <string name="hello_world">Hello world!</string>
-
-</resources>

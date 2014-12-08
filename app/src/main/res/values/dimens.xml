@@ -14,4 +14,10 @@
      limitations under the License.
 -->
 
-<trigger keyword="@string/voice_trigger" />
+<resources>
+
+    <dimen name="card_margin">40px</dimen>
+    <dimen name="table_divider_margin">8px</dimen>
+    <dimen name="table_divider_height">1px</dimen>
+
+</resources>
