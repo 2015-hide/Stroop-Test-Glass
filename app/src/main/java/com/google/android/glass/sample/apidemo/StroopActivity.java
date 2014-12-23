@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 
 import com.google.android.glass.media.Sounds;
@@ -32,6 +33,9 @@ public class StroopActivity extends Activity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
+        // keep the display from turning off
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mAdapter = new CardAdapter(createCards(this));
         mCardScroller = new CardScrollView(this);
