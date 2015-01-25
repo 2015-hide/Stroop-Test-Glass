@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.glass.sample.apidemo;
+package edu.mtu.humaneinterfacedesignenterprise.strooptest;
 
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.CardScrollAdapter;
@@ -70,4 +70,9 @@ public class CardAdapter extends CardScrollAdapter {
         }
         return AdapterView.INVALID_POSITION;
     }
+
+    public CardBuilder removeItem(int position){
+        return mCards.remove(position);
+    }
+
 }

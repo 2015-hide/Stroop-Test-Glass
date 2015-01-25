@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.android.glass.sample.apidemo"
+    package="edu.mtu.humaneinterfacedesignenterprise.strooptest"
     android:versionCode="1"
     android:versionName="1.0"
     >
@@ -31,7 +31,7 @@
 
     <application>
 
-        <activity android:name=".StroopActivity"
+        <activity android:name="edu.mtu.humaneinterfacedesignenterprise.strooptest.StroopActivity"
             android:icon="@drawable/ic_glass_logo"
             android:label="@string/app_name"
             android:exported="true" >

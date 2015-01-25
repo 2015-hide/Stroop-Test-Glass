@@ -1,4 +1,4 @@
-package com.google.android.glass.sample.apidemo;
+package edu.mtu.humaneinterfacedesignenterprise.strooptest;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 
 import com.google.android.glass.media.Sounds;
 import com.google.android.glass.widget.CardBuilder;
-import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
 
 import java.util.ArrayList;
@@ -21,27 +20,32 @@ import java.util.List;
 public class StroopActivity extends Activity {
 
     private static final String TAG = StroopActivity.class.getSimpleName();
-
-    private CardScrollAdapter mAdapter;
+    private CardAdapter mAdapter;
     private CardScrollView mCardScroller;
+    ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
+
 
     // Visible for testing.
     CardScrollView getScroller() {
         return mCardScroller;
     }
+    private StroopCycle str;
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
         // keep the display from turning off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         mAdapter = new CardAdapter(createCards(this));
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);
+
         setContentView(mCardScroller);
         setCardScrollerListener();
+
+        // hide scrollbar
+        mCardScroller.setHorizontalScrollBarEnabled(false);
+        str = new StroopCycle(this);
     }
 
     /**
@@ -79,14 +83,14 @@ public class StroopActivity extends Activity {
 
     private static CardBuilder createCard(Context context, int drawable) {
         return new CardBuilder(context, CardBuilder.Layout.TITLE)
-                .addImage(drawable)
-                .setText("");
+                .addImage(drawable);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mCardScroller.activate();
+        //str.run();
     }
 
     @Override
@@ -100,21 +104,19 @@ public class StroopActivity extends Activity {
      */
     private void setCardScrollerListener() {
         mCardScroller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "Clicked view at position " + position + ", row-id " + id);
-                int soundEffect = Sounds.TAP;
-                switch (position) {
-                    default:
-                        soundEffect = Sounds.ERROR;
-                        Log.d(TAG, "Don't show anything");
-                }
+                int soundEffect = Sounds.SELECTED;
 
-                // Play sound.
+                // Tap to move to next card
+                mCardScroller.setSelection(++position);
                 AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                 am.playSoundEffect(soundEffect);
+
             }
         });
     }
+
+
 }
