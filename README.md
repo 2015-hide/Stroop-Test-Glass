@@ -22,6 +22,3 @@ on the command line:
 
 To start the sample, say "ok glass, start stroop test" from the Glass clock
 screen or use the touch menu.
-
-
-Here is a change I made - Stephen
