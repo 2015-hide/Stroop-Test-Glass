@@ -57,7 +57,7 @@ public class StroopActivity extends Activity {
         
 	mHandler = new Handler();
 		
-	// To cycle through cards, multiply by the amount of cycles desired. 
+	// To repeat card cycle, multiply by the amount of repeats desired. 
 	int limit = cards.size();
 		
 	// Set up events to run to display the cards in succession after a
@@ -139,7 +139,7 @@ public class StroopActivity extends Activity {
         mCardScroller.deactivate();
     }
 	
-	@Override
+    @Override
     protected void onStop() {
         super.onStop();
 	mCardScroller.deactivate();
