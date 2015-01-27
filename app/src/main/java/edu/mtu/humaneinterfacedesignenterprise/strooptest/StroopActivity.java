@@ -26,9 +26,9 @@ public class StroopActivity extends Activity {
     private CardAdapter mAdapter;
     private CardScrollView mCardScroller;
 	
-	private Handler mHandler;
+    private Handler mHandler;
 	
-	private int currentCard;
+    private int currentCard;
 	
     private List<CardBuilder> cards;
 
@@ -44,50 +44,50 @@ public class StroopActivity extends Activity {
         // keep the display from turning off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
-		createCards(this);
+	createCards(this);
 		
-		currentCard = 0;
+	currentCard = 0;
 		
-		mAdapter = new CardAdapter(cards);
+	mAdapter = new CardAdapter(cards);
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);
 
         // hide scrollbar
         mCardScroller.setHorizontalScrollBarEnabled(false);
         
-		mHandler = new Handler();
+	mHandler = new Handler();
 		
-		// To cycle through cards, multiply by the amount of cycles desired. 
-		int limit = cards.size();
+	// To cycle through cards, multiply by the amount of cycles desired. 
+	int limit = cards.size();
 		
-		// Set up events to run to display the cards in succession after a
-		// period of time.
-		for (int i = 1; i <= limit; ++i) {
-			mHandler.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					updateDisplay();
-				}
-			}, 2000 * i);
-			/* 1000 ms. = 1 sec.
-			 * Runs given milliseconds after start. Milliseconds * index gives
-			 * appropriate time for later cards. If an under 2 second time is desired,
-			 * the first iteration needs a larger delay than the subsequent iterations
-			 * (approx. increase by 1 second or more); otherwise, the first card will go 
-			 * by faster than the following cards.
-			 */
-		}
+	// Set up events to run to display the cards in succession after a
+	// period of time.
+	for (int i = 1; i <= limit; ++i) {
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				updateDisplay();
+			}
+		}, 2000 * i);
+		/* 1000 ms. = 1 sec.
+		 * Runs given milliseconds after start. Milliseconds * index gives
+		 * appropriate time for later cards. If an under 2 second time is desired,
+		 * the first iteration needs a larger delay than the subsequent iterations
+		 * (approx. increase by 1 second or more); otherwise, the first card will go 
+		 * by faster than the following cards.
+		 */
+	}
     }
 	
-	/* Displays the next card, and allows for cycling through cards, if desired. */
-	private void updateDisplay() {
-		if (currentCard == cards.size()) {
-			currentCard = 0;
-		}
-		
-		setContentView(cards.get(currentCard).getView());
-		++currentCard;
+    /* Displays the next card, and allows for cycling through cards, if desired. */
+    private void updateDisplay() {
+	if (currentCard == cards.size()) {
+		currentCard = 0;
 	}
+		
+	setContentView(cards.get(currentCard).getView());
+	++currentCard;
+    }
 
     /**
      * Create list of API demo cards.
@@ -135,17 +135,17 @@ public class StroopActivity extends Activity {
 
     @Override
     protected void onPause() {
-		super.onPause();
+	super.onPause();
         mCardScroller.deactivate();
     }
 	
 	@Override
     protected void onStop() {
         super.onPause();
-		mCardScroller.deactivate();
+	mCardScroller.deactivate();
     }
 
-	/* Unneeded listener, kept in case needed later on. */
+    /* Unneeded listener, kept in case needed later on. */
     /*/**
      * Different type of activities can be shown, when tapped on a card.
      */
@@ -163,7 +163,6 @@ public class StroopActivity extends Activity {
 
             }
         });
-    } */
-
+      } */
 
 }
