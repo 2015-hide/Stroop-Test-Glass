@@ -141,7 +141,7 @@ public class StroopActivity extends Activity {
 	
 	@Override
     protected void onStop() {
-        super.onPause();
+        super.onStop();
 	mCardScroller.deactivate();
     }
 
