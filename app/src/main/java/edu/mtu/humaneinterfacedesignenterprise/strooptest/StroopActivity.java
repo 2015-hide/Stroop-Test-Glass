@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,43 +17,83 @@ import com.google.android.glass.widget.CardScrollView;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author Eric Kosovec
+ */
 public class StroopActivity extends Activity {
-
     private static final String TAG = StroopActivity.class.getSimpleName();
+	
     private CardAdapter mAdapter;
     private CardScrollView mCardScroller;
-    ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
-
+	
+	private Handler mHandler;
+	
+	private int currentCard;
+	
+    private List<CardBuilder> cards;
 
     // Visible for testing.
     CardScrollView getScroller() {
         return mCardScroller;
     }
-    private StroopCycle str;
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+		
         // keep the display from turning off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        mAdapter = new CardAdapter(createCards(this));
+        
+		createCards(this);
+		
+		currentCard = 0;
+		
+		mAdapter = new CardAdapter(cards);
         mCardScroller = new CardScrollView(this);
         mCardScroller.setAdapter(mAdapter);
 
-        setContentView(mCardScroller);
-        setCardScrollerListener();
-
         // hide scrollbar
         mCardScroller.setHorizontalScrollBarEnabled(false);
-        str = new StroopCycle(this);
+        
+		mHandler = new Handler();
+		
+		// To cycle through cards, multiply by the amount of cycles desired. 
+		int limit = cards.size();
+		
+		// Set up events to run to display the cards in succession after a
+		// period of time.
+		for (int i = 1; i <= limit; ++i) {
+			mHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					updateDisplay();
+				}
+			}, 2000 * i);
+			/* 1000 ms. = 1 sec.
+			 * Runs given milliseconds after start. Milliseconds * index gives
+			 * appropriate time for later cards. If an under 2 second time is desired,
+			 * the first iteration needs a larger delay than the subsequent iterations
+			 * (approx. increase by 1 second or more); otherwise, the first card will go 
+			 * by faster than the following cards.
+			 */
+		}
     }
+	
+	/* Displays the next card, and allows for cycling through cards, if desired. */
+	private void updateDisplay() {
+		if (currentCard == cards.size()) {
+			currentCard = 0;
+		}
+		
+		setContentView(cards.get(currentCard).getView());
+		++currentCard;
+	}
 
     /**
      * Create list of API demo cards.
      */
-    private List<CardBuilder> createCards(Context context) {
-        ArrayList<CardBuilder> cards = new ArrayList<CardBuilder>();
+    private void createCards(Context context) {
+        cards = new ArrayList<CardBuilder>();
 
         /**
          * Stroop test images
@@ -90,19 +131,25 @@ public class StroopActivity extends Activity {
     protected void onResume() {
         super.onResume();
         mCardScroller.activate();
-        //str.run();
     }
 
     @Override
     protected void onPause() {
+		super.onPause();
         mCardScroller.deactivate();
+    }
+	
+	@Override
+    protected void onStop() {
         super.onPause();
+		mCardScroller.deactivate();
     }
 
-    /**
+	/* Unneeded listener, kept in case needed later on. */
+    /*/**
      * Different type of activities can be shown, when tapped on a card.
      */
-    private void setCardScrollerListener() {
+    /*private void setCardScrollerListener() {
         mCardScroller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,7 +163,7 @@ public class StroopActivity extends Activity {
 
             }
         });
-    }
+    } */
 
 
 }
