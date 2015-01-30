@@ -118,8 +118,6 @@ public class StroopActivity extends Activity {
         cards.add(createCard(context, R.drawable.eighteen));
         cards.add(createCard(context, R.drawable.nineteen));
         cards.add(createCard(context, R.drawable.twenty));
-
-        return cards;
     }
 
     private static CardBuilder createCard(Context context, int drawable) {
