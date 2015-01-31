@@ -22,71 +22,126 @@ import java.util.List;
  */
 public class StroopActivity extends Activity {
     private static final String TAG = StroopActivity.class.getSimpleName();
-	
-    private CardAdapter mAdapter;
+
     private CardScrollView mCardScroller;
-	
-    private Handler mHandler;
+
+    private boolean autoSwipe;
 	
     private int currentCard;
 	
     private List<CardBuilder> cards;
 
     // Visible for testing.
-    CardScrollView getScroller() {
+    public CardScrollView getScroller() {
         return mCardScroller;
     }
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-		
+
+        autoSwipe = true;
+
         // keep the display from turning off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
-	createCards(this);
-		
-	currentCard = 0;
-		
-	mAdapter = new CardAdapter(cards);
+
+        createCards(this);
+
+        if (autoSwipe) {
+            autoSwipeTest(2000, 1);
+        }
+
+        else {
+            manualSwipeTest();
+        }
+    }
+
+    /**
+     * Perform a stroop test, whereby the user
+     * must swipe to get from card to card.
+     */
+    private void manualSwipeTest() {
+        if (cards == null) {
+            createCards(this);
+        }
+
         mCardScroller = new CardScrollView(this);
-        mCardScroller.setAdapter(mAdapter);
+        mCardScroller.setAdapter(new CardAdapter(cards));
 
         // hide scrollbar
         mCardScroller.setHorizontalScrollBarEnabled(false);
-        
-	mHandler = new Handler();
-		
-	// To repeat card cycle, multiply by the amount of repeats desired. 
-	int limit = cards.size();
-		
-	// Set up events to run to display the cards in succession after a
-	// period of time.
-	for (int i = 1; i <= limit; ++i) {
-		mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				updateDisplay();
-			}
-		}, 2000 * i);
-		/* 1000 ms. = 1 sec.
-		 * Runs given milliseconds after start. Milliseconds * index gives
-		 * appropriate time for later cards. If an under 2 second time is desired,
-		 * the first iteration needs a larger delay than the subsequent iterations
-		 * (approx. increase by 1 second or more); otherwise, the first card will go 
-		 * by faster than the following cards.
-		 */
-	}
+
+        setCardScrollerListener();
+
+        setContentView(mCardScroller);
     }
-	
-    /* Displays the next card, and allows for cycling through cards, if desired. */
+
+    /**
+     * Perform a stroop test, whereby the user
+     * need not swipe through the cards. Instead
+     * the cards will change by themselves.
+     *
+     * @param ms     - Time in between cards in milliseconds.
+     * @param cycles - How many times to go through the cards.
+     */
+    private void autoSwipeTest(int ms, int cycles) {
+        if (!autoSwipe) {
+            return;
+        }
+
+        if (ms <= 0) {
+            ms = 2000;
+        }
+
+        if (cycles <= 0) {
+            cycles = 1;
+        }
+
+        if (cards == null) {
+            createCards(this);
+        }
+
+        currentCard = 0;
+
+        Handler mHandler = new Handler();
+
+        // Repeats the cards cycles amount of times.
+        int limit = cards.size() * cycles;
+
+        // Set up events to run to display the cards in succession after a
+        // period of time.
+        for (int i = 1; i <= limit; ++i) {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    updateDisplay();
+                }
+            }, ms * i);
+            /* 1000 ms. = 1 sec.
+             * Runs given milliseconds after start. Milliseconds * index gives
+             * appropriate time for later cards. If an under 2 second time is desired,
+             * the first iteration needs a larger delay than the subsequent iterations
+             * (approx. increase by 1 second or more); otherwise, the first card will go
+             * by faster than the following cards.
+             */
+        }
+    }
+
+    /**
+     * Displays the next card and allows for cycling through cards,
+     * if desired.
+     */
     private void updateDisplay() {
-	if (currentCard == cards.size()) {
-		currentCard = 0;
-	}
-		
-	setContentView(cards.get(currentCard).getView());
-	++currentCard;
+        if (cards == null) {
+            return;
+        }
+
+        if (currentCard == cards.size()) {
+            currentCard = 0;
+        }
+
+        setContentView(cards.get(currentCard).getView());
+        ++currentCard;
     }
 
     /**
@@ -95,9 +150,7 @@ public class StroopActivity extends Activity {
     private void createCards(Context context) {
         cards = new ArrayList<CardBuilder>();
 
-        /**
-         * Stroop test images
-         */
+        // Stroop test images
         cards.add(createCard(context, R.drawable.one));
         cards.add(createCard(context, R.drawable.two));
         cards.add(createCard(context, R.drawable.three));
@@ -128,26 +181,33 @@ public class StroopActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        mCardScroller.activate();
+        if (mCardScroller != null) {
+            mCardScroller.activate();
+        }
     }
 
     @Override
     protected void onPause() {
-	super.onPause();
-        mCardScroller.deactivate();
+	    super.onPause();
+        if (mCardScroller != null) {
+            mCardScroller.deactivate();
+        }
     }
-	
+
     @Override
     protected void onStop() {
         super.onStop();
-	mCardScroller.deactivate();
+	    if (mCardScroller != null) {
+            mCardScroller.deactivate();
+        }
     }
 
-    /* Unneeded listener, kept in case needed later on. */
-    /*/**
-     * Different type of activities can be shown, when tapped on a card.
-     */
-    /*private void setCardScrollerListener() {
+    // Different types of activities can be shown, when tapped on a card.
+    private void setCardScrollerListener() {
+        if (mCardScroller == null) {
+            return;
+        }
+
         mCardScroller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -161,6 +221,6 @@ public class StroopActivity extends Activity {
 
             }
         });
-      } */
+    }
 
 }
