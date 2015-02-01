@@ -48,7 +48,7 @@ public class StroopActivity extends Activity {
         createCards(this);
 
         if (autoSwipe) {
-            autoSwipeTest(2000, 1);
+            autoSwipeTest(7000, 1);
         }
 
         else {
@@ -151,26 +151,47 @@ public class StroopActivity extends Activity {
         cards = new ArrayList<CardBuilder>();
 
         // Stroop test images
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.one));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.two));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.three));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.four));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.five));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.six));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.seven));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.eight));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.nine));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.ten));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.eleven));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.twelve));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.thirteen));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.fourteen));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.fifteen));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.sixteen));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.seventeen));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.eighteen));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.nineteen));
+        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.twenty));
+        cards.add(createCard(context, R.drawable.black));
     }
 
     private static CardBuilder createCard(Context context, int drawable) {
