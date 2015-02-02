@@ -119,10 +119,7 @@ public class StroopActivity extends Activity {
             }, ms * i);
             /* 1000 ms. = 1 sec.
              * Runs given milliseconds after start. Milliseconds * index gives
-             * appropriate time for later cards. If an under 2 second time is desired,
-             * the first iteration needs a larger delay than the subsequent iterations
-             * (approx. increase by 1 second or more); otherwise, the first card will go
-             * by faster than the following cards.
+             * appropriate time for later cards.
              */
         }
     }
@@ -151,7 +148,6 @@ public class StroopActivity extends Activity {
         cards = new ArrayList<CardBuilder>();
 
         // Stroop test images
-        cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.one));
         cards.add(createCard(context, R.drawable.black));
         cards.add(createCard(context, R.drawable.two));
