@@ -43,43 +43,9 @@
                 />
         </activity>
 
-        <activity android:name=".card.CardBuilderActivity"
-            android:exported="true"
-            />
-
-        <activity android:name=".touchpad.SelectGestureDemoActivity"
-            android:exported="true"
-            />
-
-        <activity android:name=".touchpad.DiscreteGesturesActivity"
-            android:exported="true"
-            />
-
-        <activity android:name=".touchpad.ContinuousGesturesActivity"
-            android:exported="true"
-            />
-
-        <activity android:name=".theming.TextAppearanceActivity"
-            android:exported="true"
-            />
-
-        <activity android:name=".opengl.MenuActivity"
-            android:exported="true"
-            android:theme="@style/MenuTheme"
-            />
-
-        <service
-            android:name=".opengl.OpenGlService"
-            android:exported="true"
-            />
-
-        <activity android:name=".voicemenu.VoiceMenuActivity"
-            android:exported="true"
-            />
-
-        <activity android:name=".slider.SliderActivity"
-            android:exported="true"
-            />
+        <activity android:name=".StroopTests"
+            android:theme="@style/MenuTheme">
+        </activity>
 
     </application>
 
