@@ -54,7 +54,7 @@ public class StroopTests extends Activity {
     }
 
     private void fourtyKMPerHour() {
-        int[] times = new int[12];
+        double[] times = new double[12];
 
         times[0] = 35;
 
@@ -64,7 +64,7 @@ public class StroopTests extends Activity {
                 times[inc] = times[inc - 1] + 18;
             }
             else {
-                times[inc] = times[inc - 1] + 14;
+                times[inc] = times[inc - 1] + 13.5;
             }
         }
 
