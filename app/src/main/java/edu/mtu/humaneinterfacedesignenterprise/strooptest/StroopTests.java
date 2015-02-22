@@ -61,7 +61,7 @@ public class StroopTests extends Activity {
         /* Generate times from start stroop cards should appear. */
         for (int inc = 1; inc < times.length; ++inc) {
             if (inc == 6) {
-                times[inc] = times[inc - 1] + 17.5;
+                times[inc] = times[inc - 1] + 16.95;
             }
             else {
                 times[inc] = times[inc - 1] + 12.95;
