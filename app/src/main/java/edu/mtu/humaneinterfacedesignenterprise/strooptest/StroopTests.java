@@ -56,7 +56,7 @@ public class StroopTests extends Activity {
     private void fourtyKMPerHour() {
         double[] times = new double[12];
 
-        times[0] = 35;
+        times[0] = 48.115;
 
         /* Generate times from start stroop cards should appear. */
         for (int inc = 1; inc < times.length; ++inc) {
@@ -64,7 +64,7 @@ public class StroopTests extends Activity {
                 times[inc] = times[inc - 1] + 17.5;
             }
             else {
-                times[inc] = times[inc - 1] + 13.5;
+                times[inc] = times[inc - 1] + 12.95;
             }
         }
 
