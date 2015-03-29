@@ -223,7 +223,9 @@ public class StroopTests extends Activity {
         setContentView(cards.get(currentCard).getView());
         ++currentCard;
     }
-
+    /**
+     * Creates a card for the list of cards
+     */
     private static CardBuilder createCard(Context context, int drawable) {
         return new CardBuilder(context, CardBuilder.Layout.TITLE)
                 .addImage(drawable);
