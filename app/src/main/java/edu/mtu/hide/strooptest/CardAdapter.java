@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package edu.mtu.humaneinterfacedesignenterprise.strooptest;
+package edu.mtu.hide.strooptest;
 
 import com.google.android.glass.widget.CardBuilder;
 import com.google.android.glass.widget.CardScrollAdapter;
