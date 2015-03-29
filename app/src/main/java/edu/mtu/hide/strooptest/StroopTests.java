@@ -1,4 +1,4 @@
-package edu.mtu.humaneinterfacedesignenterprise.strooptest;
+package edu.mtu.hide.strooptest;
 
 import android.app.Activity;
 import android.content.Context;
