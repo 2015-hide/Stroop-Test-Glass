@@ -63,6 +63,7 @@ public class StroopActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        //if the card scroller isn't activated, activate it
         if (mCardScroller != null) {
             mCardScroller.activate();
         }
@@ -71,6 +72,7 @@ public class StroopActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        //deactivate the card scroller
         if (mCardScroller != null) {
             mCardScroller.deactivate();
         }
@@ -79,6 +81,7 @@ public class StroopActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
+        //deactivate the card scroller
         if (mCardScroller != null) {
             mCardScroller.deactivate();
         }
