@@ -31,7 +31,7 @@
 
     <application>
 
-        <activity android:name="edu.mtu.humaneinterfacedesignenterprise.strooptest.StroopActivity"
+        <activity android:name="edu.mtu.hide.strooptest.StroopActivity"
             android:icon="@drawable/ic_glass_logo"
             android:label="@string/app_name"
             android:exported="true" >
