@@ -79,7 +79,7 @@ public class StroopTests extends Activity {
                 public void run() {
                     updateDisplay();
                 }
-            }, times[i] * 1000);
+            }, (long)(times[i] * 1000.0));
 
             // Transparent card
             mHandler.postDelayed(new Runnable() {
@@ -87,7 +87,7 @@ public class StroopTests extends Activity {
                 public void run() {
                     updateDisplay();
                 }
-            }, (times[i] + 3) * 1000);
+            }, (long)((times[i] + 3) * 1000.0));
         }
     }
 
